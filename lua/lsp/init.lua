@@ -1,6 +1,5 @@
 vim.diagnostic.config({
 	virtual_text = {
-		source = "always",
 		prefix = "●",
 	},
 	float = {
@@ -22,9 +21,9 @@ vim.cmd([[
 ]])
 
 require("lsp.default")
-require("lsp.pyright")
+-- require("lsp.pyright")
 require("lsp.webls")
-require("lsp.sumneko_lua")
-require("lsp.laravel")
-require("lsp.gopls")
+require("lsp.lua_ls")
+-- require("lsp.laravel")
+-- require("lsp.gopls")
 require("lsp.yaml")

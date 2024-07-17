@@ -3,15 +3,18 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
 		{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
-		"saadparwaiz1/cmp_luasnip",
+		{ "tzachar/cmp-tabnine", build = "./install.sh" },
+		"L3MON4D3/cmp-luasnip-choice",
 		"onsails/lspkind.nvim",
 	},
 	config = function()
-		local t = function(str)
-			return vim.api.nvim_replace_termcodes(str, true, true, true)
-		end
+		local cmp = require("cmp")
+		local lspkind = require("lspkind")
+		local tabnine = require("cmp_tabnine.config")
+		local compare = require("cmp.config.compare")
+
+		require("cmp_luasnip_choice").setup()
 
 		local has_words_before = function()
 			unpack = unpack or table.unpack
@@ -19,111 +22,105 @@ return {
 			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 		end
 
-		local luasnip = require("luasnip")
-		local lspkind = require("lspkind")
-		local cmp = require("cmp")
-
-		-- Auto Pairs from nvim-autopairs
-		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-		local handlers = require("nvim-autopairs.completion.handlers")
-
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+		local source_mapping = {
+			buffer = "[Buffer]",
+			nvim_lsp = "[LSP]",
+			nvim_lua = "[Lua]",
+			cmp_tabnine = "[TN]",
+			path = "[Path]",
+		}
 
 		cmp.setup({
-			formatting = {
-				format = lspkind.cmp_format({
-					with_text = true,
-					maxwidth = 50,
-				}),
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
 			},
 			snippet = {
 				expand = function(args)
-					luasnip.lsp_expand(args.body)
+					require("luasnip").lsp_expand(args.body)
 				end,
 			},
 			sources = cmp.config.sources({
-				{ name = "nvim_lsp_signature_help" },
 				{ name = "nvim_lsp" },
-				{ name = "vim-dadbod-completion" },
-				{ name = "luasnip", option = { show_autosnippets = true } },
+				{ name = "cmp_tabnine" },
+				{ name = "luasnip_choice" },
 			}, {
 				{ name = "buffer" },
-				{ name = "path" },
 			}),
-			mapping = {
-				["<Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					elseif luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump()
-					elseif has_words_before() then
-						cmp.complete()
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
+			formatting = {
+				format = function(entry, vim_item)
+					-- if you have lspkind installed, you can use it like
+					-- in the following line:
+					vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
+					vim_item.menu = source_mapping[entry.source.name]
+					if entry.source.name == "cmp_tabnine" then
+						local detail = (entry.completion_item.labelDetails or {}).detail
+						vim_item.kind = ""
+						if detail and detail:find(".*%%.*") then
+							vim_item.kind = vim_item.kind .. " " .. detail
+						end
 
-				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
+						if (entry.completion_item.data or {}).multiline then
+							vim_item.kind = vim_item.kind .. " " .. "[ML]"
+						end
 					end
-				end, { "i", "s" }),
-				["<Down>"] = cmp.mapping(
-					cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-					{ "i" }
-				),
-				["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
-				["<C-n>"] = cmp.mapping({
-					c = function()
-						if cmp.visible() then
-							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-						else
-							vim.api.nvim_feedkeys(t("<Down>"), "n", true)
-						end
-					end,
-					i = function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-						else
-							fallback()
-						end
-					end,
-				}),
-				["<C-p>"] = cmp.mapping({
-					c = function()
-						if cmp.visible() then
-							cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-						else
-							vim.api.nvim_feedkeys(t("<Up>"), "n", true)
-						end
-					end,
-					i = function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-						else
-							fallback()
-						end
-					end,
-				}),
-				["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-				["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-				["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-				["<C-e>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
-				["<CR>"] = cmp.mapping({
-					i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
-					c = function(fallback)
-						if cmp.visible() then
-							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-						else
-							fallback()
-						end
-					end,
-				}),
+					local maxwidth = 80
+					vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+					return vim_item
+				end,
 			},
+			sorting = {
+				priority_weight = 2,
+				comparators = {
+					require("cmp_tabnine.compare"),
+					compare.offset,
+					compare.exact,
+					compare.score,
+					compare.recently_used,
+					compare.kind,
+					compare.sort_text,
+					compare.length,
+					compare.order,
+				},
+			},
+			mapping = cmp.mapping.preset.insert({
+				["<C-b>"] = cmp.mapping.scroll_docs(-4),
+				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				["<C-e>"] = cmp.mapping.abort(),
+				["<CR>"] = cmp.mapping.confirm({
+					behavior = cmp.ConfirmBehavior.Insert,
+					select = true,
+				}),
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<Tab>"] = function(fallback)
+					if not cmp.select_next_item() then
+						if vim.bo.buftype ~= "prompt" and has_words_before() then
+							cmp.complete()
+						else
+							fallback()
+						end
+					end
+				end,
+				["<S-Tab>"] = function(fallback)
+					if not cmp.select_prev_item() then
+						if vim.bo.buftype ~= "prompt" and has_words_before() then
+							cmp.complete()
+						else
+							fallback()
+						end
+					end
+				end,
+			}),
+		})
+
+		tabnine:setup({
+			max_lines = 1000,
+			max_num_results = 20,
+			sort = true,
+			run_on_every_keystroke = true,
+			snippet_placeholder = "..",
+			show_prediction_strength = false,
+			min_percent = 0,
 		})
 	end,
 }

@@ -31,7 +31,6 @@ return {
 				"debugpy",
 
 				-- webdev
-				"eslint",
 				"intelephense",
 				"emmet_ls",
 				"html",
@@ -39,26 +38,27 @@ return {
 				"cssls",
 				"tsserver",
 				"yamlls",
-				"php-debug-adapter",
+				-- "php-debug-adapter",
 				"tailwindcss",
 				"blade-formatter",
 				"prettier",
+				"svelte",
 
 				-- markdown
 				"marksman",
 				"mdformat",
 
 				-- go
-				"gopls",
-				"gofumpt",
+				-- "gopls",
+				-- "gofumpt",
 
 				-- java
-				"jdtls",
-				"google-java-format",
+				-- "jdtls",
+				-- "google-java-format",
 
 				-- sql
-				"sqlls",
-				"sql-formatter",
+				-- "sqlls",
+				-- "sql-formatter",
 			},
 		})
 	end,

@@ -18,4 +18,8 @@ return {
 			vim.g.vimtex_view_compiler_method = "pdflatex"
 		end,
 	},
+	{
+		"wakatime/vim-wakatime",
+		lazy = false,
+	},
 }
