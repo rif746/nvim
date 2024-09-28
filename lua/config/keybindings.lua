@@ -16,12 +16,12 @@ map("", "<S-h>", ":bprev<CR>")
 map("", "<S-l>", ":bnext<CR>")
 
 -- Buffer Split
-map("n", "vs", ":vspit<cr>")
-map("n", "hs", ":spit<cr>")
-map("n", "v+", ":vertical resize +2<cr>")
-map("n", "v-", ":vertical resize -2<cr>")
-map("n", "h+", ":resize +2<cr>")
-map("n", "h-", ":resize -2<cr>")
+map("n", "<leader>vs", ":vsplit<cr>")
+map("n", "<leader>hs", ":split<cr>")
+map("n", "<leader>v+", ":vertical resize +2<cr>")
+map("n", "<leader>v-", ":vertical resize -2<cr>")
+map("n", "<leader>h+", ":resize +2<cr>")
+map("n", "<leader>h-", ":resize -2<cr>")
 
 -- Better Indentation Key
 map("v", "<Tab>", ">", { noremap = false, silent = true })

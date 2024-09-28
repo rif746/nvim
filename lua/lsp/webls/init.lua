@@ -5,11 +5,11 @@ setup("cssls")
 setup("html")
 
 setup("emmet_ls", {
-	filetypes = { "html", "blade", "vue", "javascriptreact", "htmldjango", "svelte", "php" },
+	filetypes = { "html", "blade", "vue", "javascriptreact", "htmldjango", "svelte" },
 })
 
-setup("svelte")
-setup("tsserver", {
+-- setup("svelte")
+setup("ts_ls", {
 	init_options = {
 		plugins = {
 			{

@@ -34,36 +34,27 @@ return {
 				max_file_lines = nil,
 			},
 			ensure_installed = {
-				-- "csv",
-				-- "c",
-				-- "cpp",
-				-- "http",
-				"json",
-				"php",
-				"phpdoc",
+				"c",
+
+				"dart",
+
+				"cmake",
+
+				"go",
+
 				"html",
 				"blade",
-				"javascript",
-				"vue",
-				"svelte",
-				"typescript",
-				"yaml",
+				"json",
+				"css",
+				"xml",
+				"php",
+				"phpdoc",
+				"php_only",
+
 				"lua",
 				"luadoc",
-				-- "latex",
-				-- "go",
-				-- "gomod",
-				"markdown",
-				"markdown_inline",
-				"gdscript",
-				"bash",
-				"dockerfile",
-				-- "kotlin",
-				-- "java",
-				"python",
-				-- "query",
-				-- "regex",
-				-- "sql",
+
+				"sql"
 			},
 			sync_install = true,
 		})

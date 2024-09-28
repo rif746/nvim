@@ -19,46 +19,30 @@ return {
 		require("mason-tool-installer").setup({
 			ensure_installed = {
 				-- lua
-				"lua_ls",
 				"stylua",
+				"luacheck",
+				"lua-language-server",
 
-				-- shell script
-				"bash-language-server",
+				-- html
+				"htmlhint",
+				"html-lsp",
+				"emmet-ls",
 
-				-- python
-				"pyright",
-				"isort",
-				"debugpy",
-
-				-- webdev
-				"intelephense",
-				"emmet_ls",
-				"html",
-				"jsonls",
-				"cssls",
-				"tsserver",
-				"yamlls",
-				-- "php-debug-adapter",
-				"tailwindcss",
+				-- php
+				"pint",
+				"phpcs",
 				"blade-formatter",
-				"prettier",
-				"svelte",
 
-				-- markdown
-				"marksman",
-				"mdformat",
+				-- javascript
+				"prettierd",
 
-				-- go
-				-- "gopls",
-				-- "gofumpt",
+				-- tailwind
+				"rustywind",
+				"tailwindcss-language-server",
 
-				-- java
-				-- "jdtls",
-				-- "google-java-format",
-
-				-- sql
-				-- "sqlls",
-				-- "sql-formatter",
+				-- golang
+				"gofumpt",
+				"golangci-lint",
 			},
 		})
 	end,
