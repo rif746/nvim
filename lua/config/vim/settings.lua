@@ -12,7 +12,7 @@ return {
 	{ "o", "termguicolors", true },
 	{ "o", "hidden", true },
 	{ "o", "guifont", "Fira Code:14" },
-	{ "o", "regexpengine", 1 },
+	{ "o", "regexpengine", 0 },
 	{ "o", "showmode", false },
 	{ "o", "smartcase", true },
 	{ "o", "splitbelow", true },
@@ -43,4 +43,7 @@ return {
 	{ "o", "updatetime", 300 },
 	{ "o", "incsearch", false },
 	{ "wo", "signcolumn", "yes" },
+
+	-- Swapfile
+	{ "opt", "swapfile", false },
 }

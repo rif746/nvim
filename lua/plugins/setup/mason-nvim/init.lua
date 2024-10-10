@@ -24,9 +24,9 @@ return {
 				"lua-language-server",
 
 				-- html
-				"htmlhint",
 				"html-lsp",
 				"emmet-ls",
+				"markuplint",
 
 				-- php
 				"pint",
