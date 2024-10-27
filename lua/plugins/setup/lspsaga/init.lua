@@ -12,9 +12,6 @@ return {
 					tyd = "textDocument/typeDefinition",
 				},
 			},
-			ui = {
-				kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-			},
 			outline = {
 				keys = {
 					jump = "<S-cr>",

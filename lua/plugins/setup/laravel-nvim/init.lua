@@ -5,6 +5,7 @@ return {
 		"tpope/vim-dotenv",
 		"MunifTanjim/nui.nvim",
 		"nvimtools/none-ls.nvim",
+		"kevinhwang91/promise-async",
 	},
 	cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
 	keys = {
@@ -16,7 +17,7 @@ return {
 	config = true,
 	opts = {
 		features = {
-			null_ls = {
+			model_info = {
 				enable = true,
 			},
 			route_info = {

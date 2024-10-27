@@ -18,5 +18,6 @@ return {
 
 	config = function()
 		require "plugins.setup.nvim-cmp.config.init"
+		require "plugins.setup.nvim-cmp.config.highlight"
 	end,
 }
