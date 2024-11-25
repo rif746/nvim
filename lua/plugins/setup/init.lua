@@ -1,6 +1,10 @@
 return {
 	{ "onsails/lspkind.nvim" },
 	{
+		"windwp/nvim-ts-autotag",
+		opts = {}
+	},
+	{
 		"jwalton512/vim-blade",
 		config = function ()
 			vim.g.blade_custom_directives = {"vite"}

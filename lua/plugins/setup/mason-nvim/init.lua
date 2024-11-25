@@ -35,6 +35,7 @@ return {
 
 				-- javascript
 				"prettierd",
+				"typescript-language-server",
 
 				-- tailwind
 				"rustywind",

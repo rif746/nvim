@@ -24,10 +24,6 @@ return {
 			indent = {
 				enable = true,
 			},
-			autotag = {
-				enable = true,
-				filetypes = { "html", "xml", "php", "blade" },
-			},
 			rainbow = {
 				enable = true,
 				extended_mode = true,
