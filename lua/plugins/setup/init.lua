@@ -1,6 +1,16 @@
 return {
 	{ "onsails/lspkind.nvim" },
 	{
+		"jwalton512/vim-blade",
+		config = function ()
+			vim.g.blade_custom_directives = {"vite"}
+			vim.g.blade_custom_directives_pairs = {
+				script = 'endscript',
+				error = 'enderror'
+			}
+		end
+	},
+	{
 		"karb94/neoscroll.nvim",
 		config = function()
 			require("neoscroll").setup()

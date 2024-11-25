@@ -17,6 +17,9 @@ return {
 	config = true,
 	opts = {
 		features = {
+			override = {
+				enable = true
+			},
 			model_info = {
 				enable = true,
 			},
