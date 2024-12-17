@@ -11,9 +11,10 @@ map("", "<A-r>", ":NvimTreeRefresh<CR>", { silent = true, noremap = false })
 map("", "<A-c>", ":NvimTreeCollapse<CR>", { silent = true, noremap = false })
 
 -- Buffer Control
+map("n", "<leader>q", "q", { noremap = true })
 map("n", "q", ":bdelete<CR>", { noremap = false })
-map("", "<S-h>", ":bprev<CR>")
-map("", "<S-l>", ":bnext<CR>")
+map("", "<Shift-h>", ":bprev<CR>")
+map("", "<Shift-l>", ":bnext<CR>")
 
 -- Buffer Split
 map("n", "<leader>vs", ":vsplit<cr>")
