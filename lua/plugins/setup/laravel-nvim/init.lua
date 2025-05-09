@@ -7,11 +7,12 @@ return {
 		"nvimtools/none-ls.nvim",
 		"kevinhwang91/promise-async",
 	},
-	cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
+	cmd = { "Laravel" },
 	keys = {
 		{ "<leader>la", ":Laravel artisan<cr>" },
 		{ "<leader>lr", ":Laravel routes<cr>" },
 		{ "<leader>lm", ":Laravel related<cr>" },
+		{ "<leader>lc", ":Laravel commands<cr>" },
 	},
 	event = { "VeryLazy" },
 	config = true,
