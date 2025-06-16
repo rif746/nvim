@@ -4,7 +4,6 @@ return {
 	cmd = { "ConformInfo" },
 	keys = {
 		{
-			-- Customize or remove this keymap to your liking
 			"<leader>f",
 			function()
 				require("conform").format({ async = true })
@@ -13,21 +12,26 @@ return {
 			desc = "Format buffer",
 		},
 	},
-	-- This will provide type hinting with LuaLS
-	---@module "conform"
-	---@type conform.setupOpts
 	opts = {
-		-- Define your formatters
 		formatters_by_ft = {
 			lua = { "stylua" },
 			blade = { "blade-formatter" },
 			php = { "pint", "php_cs_fixer" },
+			html = { "superhtml" },
+			yaml = { "yamlfix" },
+			python = { "autoflake" },
+			go = { "goimports", "golines" },
 			javascript = { "prettierd", "prettier", stop_after_first = true },
 		},
-		-- Set default options
 		default_format_opts = {
 			lsp_format = "fallback",
 		},
+		format_on_save = function(bufnr)
+			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+				return
+			end
+			return { timeout_ms = 500, lsp_format = "fallback" }
+		end,
 	},
 	init = function()
 		-- If you want the formatexpr, here is the place to set it

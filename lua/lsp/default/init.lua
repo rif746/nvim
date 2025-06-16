@@ -1,13 +1,5 @@
 local setup = require("lsp.setup")
 
--- setup("pylsp")
--- setup("clangd")
--- setup("sqlls")
--- setup("dartls")
 setup("dockerls")
-setup("vimls")
--- setup("phpactor")
 setup("yamlls")
--- setup("texlab")
 setup("tailwindcss")
--- setup("gdscript")

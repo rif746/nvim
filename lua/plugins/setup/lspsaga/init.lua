@@ -1,23 +1,24 @@
 return {
 	"nvimdev/lspsaga.nvim",
-	config = function()
-		require("lspsaga").setup({
+	opts = {
+		lightbulb = {
+			sign = false,
+		},
 
-			symbols_in_winbar = {
-				enabled = true,
-			},
+		symbols_in_winbar = {
+			enabled = true,
+		},
 
-			finder = {
-				methods = {
-					tyd = "textDocument/typeDefinition",
-				},
+		finder = {
+			methods = {
+				tyd = "textDocument/typeDefinition",
 			},
-			outline = {
-				keys = {
-					jump = "<S-cr>",
-					toggle_or_jump = "<cr>",
-				},
+		},
+		outline = {
+			keys = {
+				jump = "<S-cr>",
+				toggle_or_jump = "<cr>",
 			},
-		})
-	end,
+		},
+	},
 }

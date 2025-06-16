@@ -24,11 +24,6 @@ return {
 			indent = {
 				enable = true,
 			},
-			rainbow = {
-				enable = true,
-				extended_mode = true,
-				max_file_lines = nil,
-			},
 			ensure_installed = {
 				"c",
 
@@ -50,7 +45,10 @@ return {
 				"lua",
 				"luadoc",
 
-				"sql"
+				"markdown",
+				"markdown_inline",
+
+				"sql",
 			},
 			sync_install = true,
 		})

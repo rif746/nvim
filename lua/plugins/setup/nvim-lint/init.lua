@@ -8,8 +8,10 @@ return {
 			"-",
 		}
 		require("lint").linters_by_ft = {
-			html = { "htmlhint" },
-			go = { "golang-ci" },
+			lua = { "luacheck" },
+			python = { "flake8" },
+			yaml = { "yamllint" },
+			php = { "phpcs", "php" },
 		}
 
 		vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "InsertEnter" }, {
