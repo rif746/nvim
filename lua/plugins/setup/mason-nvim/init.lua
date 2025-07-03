@@ -49,7 +49,9 @@ return {
 				"prettier",
 
 				-- html
-				"superhtml",
+				"emmet-language-server",
+				"html-lsp",
+				"htmlbeautifier",
 				"css-lsp",
 				"tailwindcss-language-server",
 

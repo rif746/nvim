@@ -16,8 +16,8 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			blade = { "blade-formatter" },
-			php = { "pint", "php_cs_fixer" },
-			html = { "superhtml" },
+			php = { "pint" },
+			html = { "htmlbeautifier" },
 			yaml = { "yamlfix" },
 			python = { "autoflake" },
 			go = { "goimports", "golines" },

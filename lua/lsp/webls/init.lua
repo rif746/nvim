@@ -2,9 +2,22 @@ local setup = require("lsp.setup")
 
 setup("jsonls")
 setup("cssls")
-setup("superhtml", {
+setup("html", {
 	filetypes = {
 		"html",
+		"blade",
+		"php",
+		"vue",
+		"javascriptreact",
+		"htmldjango",
+		"svelte",
+	},
+})
+
+setup("emmet_language_server", {
+	filetypes = {
+		"html",
+		"css",
 		"blade",
 		"php",
 		"vue",

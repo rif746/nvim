@@ -7,7 +7,6 @@ return {
 
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-path",
-		"SergioRibera/cmp-dotenv",
 
 		-- LSP
 		"hrsh7th/cmp-nvim-lsp",
@@ -19,7 +18,7 @@ return {
 
 	config = function()
 		require("plugins.setup.nvim-cmp.config.init")
-		require("plugins.setup.nvim-cmp.config.text_change")
+		-- require("plugins.setup.nvim-cmp.config.text_change")
 		require("plugins.setup.nvim-cmp.config.highlight")
 	end,
 }
