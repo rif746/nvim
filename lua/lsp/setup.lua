@@ -1,24 +1,8 @@
-return function(lang, config)
-	local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+return function(params)
+	setmetatable(params, { __index = { server = "", config = {} } })
+	local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol)
+	params.config.capabilities = vim.tbl_deep_extend("force", capabilities, params.config.capabilities or {})
 
-	capabilities.textDocument.foldingRange = {
-		dynamicRegistration = false,
-		lineFoldingOnly = true,
-	}
-
-	local mod = require("lspconfig")[lang]["setup"]
-	if type(config) ~= "table" then
-		config = {}
-	end
-	config["capabilities"] = capabilities
-
-	if type(config["on_attach"]) ~= "table" then
-		config["on_attach"] = require("lsp.key")
-	end
-
-	if type(mod) == "table" then
-		mod = config
-	else
-		mod(config)
-	end
+	vim.lsp.config(params.server, params.config)
+	vim.lsp.enable(params.server)
 end

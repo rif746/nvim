@@ -46,4 +46,5 @@ return {
 
 	-- Swapfile
 	{ "opt", "swapfile", false },
+	{ "opt", "winborder", "rounded" },
 }

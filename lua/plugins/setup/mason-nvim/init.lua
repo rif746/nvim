@@ -16,50 +16,39 @@ return {
 				},
 			},
 		})
+		require("mason").setup()
 		require("mason-tool-installer").setup({
 			ensure_installed = {
-				-- lua
-				"lua-language-server",
-				"luacheck",
+				-- Formatters
 				"stylua",
-
-				-- python
-				"pyright",
-				"autoflake",
-				"flake8",
-
-				-- docker
-				"dockerfile-language-server",
-
-				-- go
+				"blade-formatter",
+				"pint",
+				"prettier",
+				"yamlfix",
+				"black",
+				"isort",
 				"goimports",
 				"golines",
-				"gopls",
+				"prettierd",
 
-				-- php
-				"intelephense",
-				"php-cs-fixer",
-				"phpcs",
-				"pint",
-				"blade-formatter",
-
-				-- javascript
-				"json-lsp",
-				"typescript-language-server",
-				"prettier",
-
-				-- html
-				"emmet-language-server",
-				"html-lsp",
-				"htmlbeautifier",
-				"css-lsp",
-				"tailwindcss-language-server",
-
-				-- yaml
-				"yaml-language-server",
-				"yamlfix",
+				-- Linters
+				"luacheck",
+				"flake8",
 				"yamllint",
+				"phpstan",
+				"stylelint",
+
+				-- LSPs
+				"lua_ls",
+				"pyright",
+				"yamlls",
+				"html",
+				"cssls",
+				"intelephense",
+				"gopls",
 			},
+			auto_update = true,
+			run_on_start = true,
 		})
 	end,
 }

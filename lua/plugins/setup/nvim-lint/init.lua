@@ -11,7 +11,8 @@ return {
 			lua = { "luacheck" },
 			python = { "flake8" },
 			yaml = { "yamllint" },
-			php = { "php" },
+			php = { "phpstan" },
+			css = { "stylelint" },
 		}
 
 		vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave", "InsertEnter" }, {

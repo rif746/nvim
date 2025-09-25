@@ -1,29 +1,34 @@
+local setup = require("lsp.setup")
+
+setup({ server = "lua_ls" })
+setup({ server = "pyright" })
+setup({ server = "yamlls" })
+setup({ server = "html" })
+setup({ server = "cssls" })
+setup({ server = "intelephense" })
+setup({ server = "gopls" })
+
 vim.diagnostic.config({
-	virtual_text = {
-		prefix = "●",
-	},
+	virtual_text = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
 	float = {
-		source = "if_many",
+		border = "rounded",
+		source = true,
+	},
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.INFO] = "󰋽 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
+		},
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+			[vim.diagnostic.severity.WARN] = "WarningMsg",
+		},
 	},
 })
 
-vim.o.updatetime = 250
-vim.cmd([[
-  highlight! DiagnosticLineNrError guibg=#51202A guifg=#FF0000 gui=bold
-  highlight! DiagnosticLineNrWarn guibg=#51412A guifg=#FFA500 gui=bold
-  highlight! DiagnosticLineNrInfo guibg=#1E535D guifg=#00FFFF gui=bold
-  highlight! DiagnosticLineNrHint guibg=#1E205D guifg=#0000FF gui=bold
-
-  sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=DiagnosticLineNrError
-  sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=DiagnosticLineNrWarn
-  sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticLineNrInfo
-  sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticLineNrHint
-]])
-
-require("lsp.default")
--- require("lsp.pyright")
-require("lsp.webls")
-require("lsp.lua_ls")
--- require("lsp.laravel")
--- require("lsp.gopls")
-require("lsp.yaml")
+vim.opt.updatetime = 250
